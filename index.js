@@ -5,7 +5,7 @@ const cors = require('cors')
 
 require('dotenv').config()
 
-const port = 5000;
+const port = process.env.PORT|| 5000;
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@imrancluster.1djvc.mongodb.net/${process.env.DB_USER}?retryWrites=true&w=majority`;
 
@@ -72,4 +72,4 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.listen(port)
+app.listen(process.env.PORT || port)
