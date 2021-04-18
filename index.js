@@ -19,7 +19,26 @@ client.connect(err => {
   const allServices = client.db("We-Clean").collection("We-Clean-services");
   const allReviews = client.db("We-Clean").collection("reviews");
   const selectedService = client.db("We-Clean").collection("selectedServices");
+  const addAdmins = client.db("We-Clean").collection("admins");
  console.log("database connected successfully");
+
+ app.post('/addAdmin',(req,res)=>{
+    const newAdmin = req.body;
+    addAdmins.insertOne(newAdmin)
+    .then(result=>{
+        res.send(result.insertedCount>0);
+        // console.log(result);
+    })
+    // console.log(newAdmin);
+
+})
+app.get('/admin',(req,res)=>{
+    addAdmins.find({})
+    .toArray((err,documents)=>{
+        res.send(documents)
+    })
+})
+
 
     app.post('/addServices',(req,res)=>{
         const newServices = req.body;
